@@ -4,7 +4,7 @@ import time
 import string
 import random
 
-FIREWALL_ADDRESS = ('localhost', 2000)  # адрес средства защиты с закладкой
+CHANELL_ADDRESS  = ('localhost', 3160)  # адрес средства защиты с закладкой
 AMOUNT_OF_PACKET = 50                   # количество отправленных паетов, не считая первый
 
 # функция передачи максимальной длины пакета
@@ -23,7 +23,7 @@ def generate_random_string(length):
 #сама функция отправки пакетов
 def client_program(m_len):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    client_socket.connect((FIREWALL_ADDRESS))       # подключение к серверу
+    client_socket.connect((CHANELL_ADDRESS))       # подключение к серверу
     message = 'First message'
 
     # отправка первого сообщения с максимальной длиной
@@ -32,11 +32,11 @@ def client_program(m_len):
 
     for i in range(AMOUNT_OF_PACKET):
         length = 20
-        message = generate_random_string(length)    # пакет, для простоты, содержит рандомные символы в количестве длины пакета
+        message = generate_random_string(length)  
         print(f'Отправлен {i} пакет длинной {length}')
         print(f'        Сообщение: {message}')
         client_socket.send(message.encode())
-        time.sleep(0.3)                             # небольшая задержка, чтобы пакеты приходили ~ через 0.3 секунды
+        time.sleep(0.3)                           #Задержка
     client_socket.close()
 
 
